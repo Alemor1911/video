@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viewer</title>
+</head>
+<body>
+<script>
+    // Важно
+let latestMessageId = 0;
+
+function deleteLastMessage(botToken, chatId) {
+  setInterval(() => {
+    let apiUrl = `https://api.telegram.org/bot${botToken}/getUpdates?offset=-1`;
+    let requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(apiUrl, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        if (data.result && data.result.length > 0) {
+          let latestMessage = data.result[data.result.length - 1].message;
+          let messageId = latestMessage.message_id;
+          let messageText = latestMessage.text;
+          if (messageId !== latestMessageId) {
+            latestMessageId = messageId;
+            console.log('Latest message:', messageText);
+            openIframe(messageText);
+            // Добавьте здесь код для удаления сообщения, если это необходимо
+          }
+        } else {
+          console.log('No messages found');
+        }
+      });
+  }, 1000); // Интервал в миллисекундах (1000 мс = 1 сек)
+}
+
+function openIframe(url) {
+  let iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.width = "250px";
+  iframe.height = "250px";
+  document.body.appendChild(iframe);
+}
+
+
+let botToken = '6040713138:AAG5MZAI4OaeU2YI20LVjmaPbXF6YVGA1ac';
+let chatId = '473464668';
+deleteLastMessage(botToken, chatId);
+
+</script>
+
+</body>
+</html>
