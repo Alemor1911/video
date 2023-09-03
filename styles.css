@@ -1,0 +1,78 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: #696969;
+    font-family: 'Palatino', 'URW Palladio L', serif;
+    font-weight: bold; /* Делаем текст жирным */
+    text-align: center; /* Выравниваем текст по центру */
+    background-color: #1AB385; /* Цвет фона кнопки */
+}
+h2 {
+    color: #696969;
+    font-family: 'Palatino', 'URW Palladio L', serif;
+    font-weight: bold; /* Делаем текст жирным */
+    text-align: center; /* Выравниваем текст по центру */
+    background-color: #1AB385; /* Цвет фона кнопки */
+}
+
+img {
+    width: 100%;
+    height: auto;
+
+}
+/* Стили для перемещаемых iframe */
+.iframe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Стили для iframe */
+.iframe-container iframe {
+    width: 100%; /* Ширина на 100% доступной ширины экрана */
+    height: 200px; /* Автоматическая высота, чтобы соответствовать содержимому */
+    border: none;
+}
+.iframe-container .button-overlay {
+    position: absolute; /* Установим абсолютное позиционирование */
+    top: 0; /* Разместим кнопку вверху контейнера */
+    left: 0px; /* Отступ слева от iframe */
+    width: 300px; /* Ширина кнопки */
+    height: 85px; /* Высота кнопки */
+    background-color: #1AB385; /* Цвет фона кнопки */
+    font-family: Arial, sans-serif;
+    color: #fff; /* Цвет текста кнопки */
+    border: none;
+    cursor: pointer;
+    z-index: 1; /* Установим z-index, чтобы кнопка была наверху */
+}
+.iframe-container .button-1 {
+    top: 0; /* Расположим первую кнопку над первым iframe */
+    left: 0; /* Отступ слева от первого iframe */
+    width: 100%; /* Ширина на 100% доступной ширины экрана */
+}
+
+.iframe-container .button-2 {
+    top: 200px; /* Расположим вторую кнопку над вторым iframe */
+    left: 0px; /* Отступ слева от второго iframe */
+    width: 100%; /* Ширина на 100% доступной ширины экрана */
+}
+
+.iframe-container .button-3 {
+    top: 400px; /* Расположим третью кнопку над третьим iframe */
+    left: 0px; /* Отступ слева от третьего iframe */
+    width: 100%; /* Ширина на 100% доступной ширины экрана */
+}
+
+.iframe-container .button-4 {
+    top: 600px; /* Расположим четвертую кнопку над четвертым iframe */
+    left: 0px; /* Отступ слева от четвертого iframe */
+    width: 100%; /* Ширина на 100% доступной ширины экрана */
+}

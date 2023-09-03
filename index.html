@@ -2,56 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Viewer</title>
+    <title>USDT Earn Telegram Bot</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="main">
+        <h1>Earn USDT</h1>
+        <h2>Username Balance: tgInfo</h2>
+        <img src="TETHER.png">
+<div class="iframe-container">
+        <iframe src="https://skyhome.squarespace.com/?video_id=G46xBxP1TIE&timer=20&report_id=1629220397&task_id=1331703&hash=a8611c973bb2c6a4cab74545ceef4677"></iframe>
+        <button class="button-overlay button-1">Window #1 (free)</button>
+
+        <iframe src="https://skyhome.squarespace.com/?video_id=G46xBxP1TIE&timer=20&report_id=1629220397&task_id=1331703&hash=a8611c973bb2c6a4cab74545ceef4677"></iframe>
+        <button class="button-overlay button-2">Window #2 1$/1 month</button>
+
+        <iframe src="https://skyhome.squarespace.com/?video_id=G46xBxP1TIE&timer=20&report_id=1629220397&task_id=1331703&hash=a8611c973bb2c6a4cab74545ceef4677"></iframe>
+        <button class="button-overlay button-3">Window #2 2$/1 month</button>
+
+        <iframe src="https://skyhome.squarespace.com/?video_id=G46xBxP1TIE&timer=20&report_id=1629220397&task_id=1331703&hash=a8611c973bb2c6a4cab74545ceef4677"></iframe>
+        <button class="button-overlay button-4">Window #2 3$/1 month</button>
+</div>
+    </div>
 <script>
-    // Важно
-let latestMessageId = 0;
+        // JavaScript для перемещения iframe
+        const iframes = document.querySelectorAll('.draggable-iframe');
+        let isDragging = false;
+        let activeIframe = null;
+        let offsetX, offsetY;
 
-function deleteLastMessage(botToken, chatId) {
-  setInterval(() => {
-    let apiUrl = `https://api.telegram.org/bot${botToken}/getUpdates?offset=-1`;
-    let requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(apiUrl, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        if (data.result && data.result.length > 0) {
-          let latestMessage = data.result[data.result.length - 1].message;
-          let messageId = latestMessage.message_id;
-          let messageText = latestMessage.text;
-          if (messageId !== latestMessageId) {
-            latestMessageId = messageId;
-            console.log('Latest message:', messageText);
-            openIframe(messageText);
-            // Добавьте здесь код для удаления сообщения, если это необходимо
-          }
-        } else {
-          console.log('No messages found');
-        }
-      });
-  }, 1000); // Интервал в миллисекундах (1000 мс = 1 сек)
-}
+        iframes.forEach((iframe) => {
+            iframe.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                activeIframe = iframe;
+                offsetX = e.clientX - iframe.getBoundingClientRect().left;
+                offsetY = e.clientY - iframe.getBoundingClientRect().top;
+            });
+        });
 
-function openIframe(url) {
-  let iframe = document.createElement('iframe');
-  iframe.src = url;
-  iframe.width = "250px";
-  iframe.height = "250px";
-  document.body.appendChild(iframe);
-}
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
 
+            const x = e.clientX - offsetX;
+            const y = e.clientY - offsetY;
 
-let botToken = '6040713138:AAG5MZAI4OaeU2YI20LVjmaPbXF6YVGA1ac';
-let chatId = '473464668';
-deleteLastMessage(botToken, chatId);
+            activeIframe.style.left = `${x}px`;
+            activeIframe.style.top = `${y}px`;
+        });
 
-</script>
-
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            activeIframe = null;
+        });
+    </script>
 </body>
 </html>
