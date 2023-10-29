@@ -12,10 +12,10 @@
     <script>
         const output = document.getElementById('output');
         const messageInput = document.getElementById('message');
-        const socket = new WebSocket('ws://127.0.0.1:12345');
+        const socket = new WebSocket('ws://127.0.0.1:50');  // Используем ваш локальный адрес и порт
 
         socket.onopen = (event) => {
-            output.innerHTML += '<p>Подключено к серверу.</p>';
+            output.innerHTML += '<p>Подключено к локальному серверу.</p>';
         };
 
         socket.onmessage = (event) => {
@@ -23,7 +23,7 @@
         };
 
         socket.onclose = (event) => {
-            output.innerHTML += '<p>Соединение закрыто.</p>';
+            output.innerHTML += '<p>Соединение с локальным сервером закрыто.</p>';
         };
 
         function sendMessage() {
