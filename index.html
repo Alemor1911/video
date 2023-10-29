@@ -19,8 +19,14 @@
         };
 
         socket.onmessage = (event) => {
-            const response = event.data;
-            responseFrame.srcdoc = response; // Открывает ответ в iframe
+        const videoUrl = event.data; // Предположим, что ответ сервера - это URL видео
+        const iframe = document.getElementById('responseFrame');
+    
+        // Создаем HTML-код для вставки видео в iframe
+        const videoHtml = `<iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`;
+    
+        // Устанавливаем HTML-код в iframe
+        iframe.innerHTML = videoHtml;
         };
 
         socket.onclose = (event) => {
