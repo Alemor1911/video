@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WebSocket Client</title>
+    <title>WebSocket Client with iframe</title>
 </head>
 <body>
     <h1>WebSocket Client</h1>
-    <div id="output"></div>
     <input type="text" id="message" placeholder="Введите сообщение">
     <button onclick="sendMessage()">Отправить</button>
+    <iframe id="responseFrame" frameborder="0"></iframe>
 
     <script>
-        const output = document.getElementById('output');
         const messageInput = document.getElementById('message');
+        const responseFrame = document.getElementById('responseFrame');
         const socket = new WebSocket('ws://127.0.0.1:50');
 
         socket.onopen = (event) => {
-            output.innerHTML += '<p>Подключено к локальному серверу.</p>';
+            console.log('Подключено к локальному серверу.');
         };
 
         socket.onmessage = (event) => {
-            output.innerHTML += '<p>Получено сообщение: ' + event.data + '</p>';
+            const response = event.data;
+            responseFrame.srcdoc = response; // Открывает ответ в iframe
         };
 
         socket.onclose = (event) => {
-            output.innerHTML += '<p>Соединение с локальным сервером закрыто.</p>';
+            console.log('Соединение с локальным сервером закрыто.');
         };
 
         function sendMessage() {
             const message = messageInput.value;
             socket.send(message);
-            output.innerHTML += '<p>Отправлено сообщение: ' + message + '</p>';
-            messageInput.value = '';
         }
     </script>
 </body>
