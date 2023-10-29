@@ -12,7 +12,7 @@
     <script>
         const output = document.getElementById('output');
         const messageInput = document.getElementById('message');
-        const socket = new WebSocket('ws://your_server_address:your_server_port');
+        const socket = new WebSocket('ws://127.0.0.1:12345');
 
         socket.onopen = (event) => {
             output.innerHTML += '<p>Подключено к серверу.</p>';
