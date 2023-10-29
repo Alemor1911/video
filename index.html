@@ -26,8 +26,8 @@
         const videoHtml = `<iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`;
     
         // Устанавливаем HTML-код в iframe
-        iframe.innerHTML = videoHtml;
-        };
+        iframe.srcdoc = videoHtml;
+    };
 
         socket.onclose = (event) => {
             console.log('Соединение с локальным сервером закрыто.');
