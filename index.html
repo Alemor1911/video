@@ -1,42 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>WebSocket Client with iframe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Iframe</title>
 </head>
 <body>
-    <h1>WebSocket Client</h1>
-    <input type="text" id="message" placeholder="Введите сообщение">
-    <button onclick="sendMessage()">Отправить</button>
-    <iframe id="responseFrame" frameborder="0"></iframe>
+    <h1>QuantumCipher</h1>
 
     <script>
-        const messageInput = document.getElementById('message');
-        const responseFrame = document.getElementById('responseFrame');
-        const socket = new WebSocket('ws://127.0.0.1:50');
+        // Генерация случайного идентификатора для каждого пользователя
+        const userId = Math.floor(Math.random() * 1000);
 
-        socket.onopen = (event) => {
-            console.log('Подключено к локальному серверу.');
-        };
+        // Список веб-сайтов для отображения в iframe
+        const websites = [
+            'https://www.example.com',
+            'https://www.anotherexample.com',
+            // Добавьте другие сайты, которые вы хотите отобразить
+        ];
 
-        socket.onmessage = (event) => {
-        const videoUrl = event.data; // Предположим, что ответ сервера - это URL видео
-        const iframe = document.getElementById('responseFrame');
-    
-        // Создаем HTML-код для вставки видео в iframe
-        const videoHtml = `<iframe src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`;
-    
-        // Устанавливаем HTML-код в iframe
-        iframe.srcdoc = videoHtml;
-    };
+        // Выбор случайного сайта для текущего пользователя
+        const selectedWebsite = websites[userId % websites.length];
 
-        socket.onclose = (event) => {
-            console.log('Соединение с локальным сервером закрыто.');
-        };
+        // Создание iframe с выбранным веб-сайтом
+        const iframe = document.createElement('iframe');
+        iframe.src = selectedWebsite;
+        iframe.width = '100%';
+        iframe.height = '400px';
 
-        function sendMessage() {
-            const message = messageInput.value;
-            socket.send(message);
-        }
+        // Добавление iframe к телу страницы
+        document.body.appendChild(iframe);
+
+        // Отладочная информация
+        console.log(`User ${userId} is viewing: ${selectedWebsite}`);
     </script>
 </body>
 </html>
